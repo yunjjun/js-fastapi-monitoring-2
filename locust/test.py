@@ -26,5 +26,5 @@ dataset = (
 )
 
 record = random.choice(dataset).copy()
-r = requests.post('http://114.203.232.71:5000/predict',data = record)
+r = requests.post('http://114.203.232.71:5000/predict', data = record)
 print(r.text)
