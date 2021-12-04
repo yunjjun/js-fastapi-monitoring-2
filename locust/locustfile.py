@@ -33,7 +33,7 @@ class WinePredictionUser(HttpUser):
     @task(10)
     def prediction(self):
         record = random.choice(dataset).copy()
-        self.client.post("http://114.203.232.71:5000/predict", json=record)
+        self.client.post("/predict", json=record)
 
     @task(2)
     def prediction_bad_value(self):
