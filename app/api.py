@@ -2,7 +2,7 @@ from pathlib import Path
 import numpy as np
 from fastapi import FastAPI, Response
 from joblib import load
-from app.schemas import Wine, Rating
+from app.schemas import Wine, Rating, feature_names
 from monitoring import instrumentator
 
 ROOT_DIR = Path(__file__).parent.parent

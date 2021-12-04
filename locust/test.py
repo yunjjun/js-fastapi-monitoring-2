@@ -1,4 +1,4 @@
-from locust import HttpUser, task
+import requests
 import pandas as pd
 import random
 
@@ -17,7 +17,7 @@ feature_columns = {
 }
 dataset = (
     pd.read_csv(
-        "winequality-red.csv",
+        "C:\\mlops\\lectures\\js-fastapi-monitoring-2\\winequality-red.csv",
         delimiter=",",
     )
     .rename(columns=feature_columns)
@@ -25,19 +25,6 @@ dataset = (
     .to_dict(orient="records")
 )
 
-class WinePredictionUser(HttpUser):
-    @task(1)
-    def healthcheck(self):
-        self.client.get("/healthcheck")
-
-    @task(10)
-    def prediction(self):
-        record = random.choice(dataset).copy()
-        self.client.post("http://114.203.232.71:5000/predict", json=record)
-
-    @task(2)
-    def prediction_bad_value(self):
-        record = random.choice(dataset).copy()
-        corrupt_key = random.choice(list(record.keys()))
-        record[corrupt_key] = "bad data"
-        self.client.post("/predict", json=record)
+record = random.choice(dataset).copy()
+r = requests.post('http://114.203.232.71:5000/predict',data = record)
+print(r.text)
