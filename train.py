@@ -21,7 +21,7 @@ def prepare_dataset(test_size=0.2, random_seed=1):
     return {"train": train_df, "test": test_df}
 
 def train():
-    logger.info("Preparing dataset...")
+    logger.info("Preparing dataset...!")
     dataset = prepare_dataset()
     train_df = dataset["train"]
     test_df = dataset["test"]
